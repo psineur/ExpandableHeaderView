@@ -51,7 +51,7 @@
 
 - (void)setupElements
 {
-    static NSUInteger const kElementsCount = 10;
+    static NSUInteger const kElementsCount = 40;
     
     NSMutableArray *elementsList = [NSMutableArray arrayWithCapacity:kElementsCount];
     
