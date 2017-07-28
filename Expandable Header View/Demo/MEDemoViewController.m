@@ -100,6 +100,15 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [self.headerView offsetDidUpdate:scrollView.contentOffset];
+    if (scrollView.contentOffset.y > 0) {
+        [self.tableView beginUpdates];
+        CGRect headerViewRect = self.headerView.frame;
+        headerViewRect.origin = CGPointZero;
+        headerViewRect.size.height = MAX(self.headerView.originalHeight - scrollView.contentOffset.y, 28.0f);
+        self.headerView.frame = headerViewRect;
+        [self.tableView endUpdates];
+    }
+    
 }
 
 @end
