@@ -10,14 +10,9 @@
 
 @interface MEExpandableHeaderView : UIView
 
+@property(nonatomic, readonly, assign) CGFloat offset;
 @property(nonatomic, strong) UIImage *backgroundImage;
-@property(nonatomic, strong) NSArray *pages;
-
-@property(nonatomic, strong, readonly) UIImageView *backgroundImageView;
-@property(nonatomic, strong, readonly) UIScrollView *pagesScrollView;
-@property(nonatomic, strong, readonly) UIPageControl *pageControl;
-
-
+@property(nonatomic, assign, readonly) CGFloat originalHeight;
 
 /**
  *	@brief		This method is used to get notified when the container table view's offset was
