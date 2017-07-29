@@ -55,6 +55,12 @@
         _backgroundImageView.clipsToBounds = YES;
         _backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         [self addSubview:_backgroundImageView];
+        
+        UIView *fullsizeSuperview = [[UIView alloc] initWithFrame:CGRectZero];
+        _fullsizeContentView = [[UIView alloc] initWithFrame:CGRectZero];
+        fullsizeSuperview.clipsToBounds = YES;
+        [fullsizeSuperview addSubview:_fullsizeContentView];
+        [self addSubview:fullsizeSuperview];
 
         UIView *shrinkSuperview = [[UIView alloc] initWithFrame:CGRectZero];
         _shrinkedContentView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -90,9 +96,6 @@
         self.frame = headerViewRect;
         [tableView endUpdates];
     }
-
-    // TODO: needed?
-//    [self _updateShrinkedContentViewFrame];
 }
 
 #pragma mark - Private
@@ -100,19 +103,20 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    _shrinkedContentView.superview.frame = self.bounds;
 
-    [self _updateShrinkedContentViewFrame];
+    // Update shrinked content view
+    CGFloat shrinkY = 2 * (self.frame.size.height - _shrinkHeight);
+    _shrinkedContentView.superview.frame = self.bounds;
+    _shrinkedContentView.frame = CGRectMake(0, shrinkY, _shrinkedContentView.superview.bounds.size.width, _shrinkHeight);
+
+    // Update fullsize content view
+    CGFloat fullY = - _originalHeight + shrinkY * _originalHeight / (2.0f * (_originalHeight - _shrinkHeight));
+    _fullsizeContentView.superview.frame = self.bounds;
+    _fullsizeContentView.frame = CGRectMake(0, fullY, _fullsizeContentView.superview.bounds.size.width, _originalHeight);
+    
     if (self.onLayout) {
         self.onLayout(self, _fullsizeContentView, _shrinkedContentView);
     }
-}
-
-- (void)_updateShrinkedContentViewFrame
-{
-    CGFloat yPosition = 2 * (self.frame.size.height - _shrinkHeight);
-    _shrinkedContentView.superview.frame = self.bounds;
-    _shrinkedContentView.frame = CGRectMake(0, yPosition, _shrinkedContentView.superview.bounds.size.width, _shrinkHeight);
 }
 
 - (void)_updateBackgroundImageViewBlur:(CGPoint)newOffset
