@@ -37,6 +37,9 @@
 @end
 
 @implementation MEExpandableHeaderView
+{
+    UIImageView *_avatar;
+}
 
 #pragma mark - Init
 
@@ -59,11 +62,27 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+
+    static CGFloat kTopMargin = 30.0f;
+    CGFloat kAvatarSize = 128.0f;
+
+    CGFloat bW = self.bounds.size.width;
+    CGFloat bH = self.bounds.size.height;
+
+    _avatar.frame = CGRectMake(0.5f * (bW - kAvatarSize), kTopMargin, kAvatarSize, kAvatarSize);
+    _avatar.layer.cornerRadius = 0.5f * kAvatarSize;
+    _avatar.layer.borderColor = UIColor.whiteColor.CGColor;
+    _avatar.layer.borderWidth = 6.0f;
 }
 
 - (void)commonInit
 {
     _originalHeight = self.bounds.size.height;
+    
+    _avatar = [[UIImageView alloc] initWithFrame:CGRectZero];
+    _avatar.contentMode = UIViewContentModeScaleToFill;
+    _avatar.clipsToBounds = YES;
+    _avatar.image = [UIImage imageNamed:@"defaultAvatar"];
 }
 
 #pragma mark - Setup
@@ -80,6 +99,7 @@
         imageView.clipsToBounds = YES;
         imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         [self insertSubview:imageView atIndex:0];
+        [imageView addSubview:_avatar];
         _backgroundImageView = imageView;
     }
     
@@ -92,15 +112,11 @@
 {
     _offset = newOffset.y;
     [self _updateBlur:newOffset];
-    if (newOffset.y <= 0)
-    {
+    if (newOffset.y <= 0) {
         CGAffineTransform translate = CGAffineTransformMakeTranslation(0, newOffset.y);
-        
         CGFloat scaleFactor = (_originalHeight - 2 * newOffset.y) / _originalHeight;
-        
         CGAffineTransform translateAndZoom = CGAffineTransformScale(translate, scaleFactor, scaleFactor);
         _backgroundImageView.transform = translateAndZoom;
-
     }
 }
 

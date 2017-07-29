@@ -50,12 +50,13 @@
     
     [self setupElements];
     [self setupHeaderView];
+    self.navigationItem.title = @"Profile";
 }
 
 #pragma mark - Setup
 
-static const CGFloat kShrinkSize = 60.0f;
-static const CGFloat kFullSize = 240.0f;
+static const CGFloat kShrinkSize = 30.0f;
+static const CGFloat kFullSize = 180.0f;
 - (void)setupHeaderView
 {
     _headerView = [[MEExpandableHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, kFullSize)];
