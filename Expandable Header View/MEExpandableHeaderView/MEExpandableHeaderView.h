@@ -29,21 +29,33 @@
 
 @interface MEExpandableHeaderView : UIView
 
-@property(nonatomic, readonly, assign) CGFloat offset;
-@property(nonatomic, strong) UIImage *backgroundImage;
 @property(nonatomic, assign, readonly) CGFloat originalHeight;
+@property(nonatomic, assign, readonly) CGFloat shrinkHeight;
+
+@property(nonatomic, copy, readwrite) void (^onLayout)(UIView *headerView, UIView *fullsizeContent, UIView *shrinkContent);
+
+@property(nonatomic, strong, readonly) UIImageView *backgroundImageView;
+@property(nonatomic, strong, readonly) UIView *shrinkedContentView;
+@property(nonatomic, strong, readonly) UIView *fullsizeContentView;
+
+/** 
+ * Provides class for backgroundImageView, default is UIImageView,
+ * Override this method to return your own UIImageView subclass/compatible class (e.g. PFImageView)
+ */
++ (Class)backgroundImageViewClass;
+- (instancetype)initWithFullsizeHeight:(CGFloat)fullsizeHeight shrinkedHeight:(CGFloat)shrinkedHeight;
+
+/** 
+ * Call if backgroundImageView.image was changed.
+ */
+- (void)resetBackgroundImage;
 
 /**
- *	@brief		This method is used to get notified when the container table view's offset was
- *				updated.
- *
- *	@details	When this method is called, it will update current zoom level and blur level
- *				of the background image. The value Y of the new offset will be user for that.
- *				The pages' content will be kept centered.
- *
- *	@param		newOffset			New offset value.
- *
+ * Forward -scrollViewDidScroll: here.
+ * ATTENTION: this method changes self.frame and issue begin/end updates to tableView.
+ * 
+ * @param tableView used to call -beginUpdates & -endUpdates on
  */
-- (void)offsetDidUpdate:(CGPoint)newOffset;
+- (void)tableView:(UITableView *)tableView didUpdateContentOffset:(CGPoint)newOffset;
 
 @end

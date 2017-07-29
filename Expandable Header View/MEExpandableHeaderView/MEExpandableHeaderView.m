@@ -29,105 +29,108 @@
 #import "UIImage+ImageEffects.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface MEExpandableHeaderView()<UIScrollViewDelegate>
-
-@property(nonatomic, strong) UIImage *originalBackgroundImage;
-@property(nonatomic, strong, readwrite) UIImageView *backgroundImageView;
-
+@interface MEExpandableHeaderView()
 @end
 
 @implementation MEExpandableHeaderView
 {
-    UIImageView *_avatar;
-}
-
-#pragma mark - Init
-
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    if (self = [super initWithFrame:frame]) {
-        [self commonInit];
-    }
-    return self;
-}
-
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    [self commonInit];
-}
-
-#pragma mark - Resize
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-
-    static CGFloat kTopMargin = 30.0f;
-    CGFloat kAvatarSize = 128.0f;
-
-    CGFloat bW = self.bounds.size.width;
-    CGFloat bH = self.bounds.size.height;
-
-    _avatar.frame = CGRectMake(0.5f * (bW - kAvatarSize), kTopMargin, kAvatarSize, kAvatarSize);
-    _avatar.layer.cornerRadius = 0.5f * kAvatarSize;
-    _avatar.layer.borderColor = UIColor.whiteColor.CGColor;
-    _avatar.layer.borderWidth = 6.0f;
-}
-
-- (void)commonInit
-{
-    _originalHeight = self.bounds.size.height;
-    
-    _avatar = [[UIImageView alloc] initWithFrame:CGRectZero];
-    _avatar.contentMode = UIViewContentModeScaleToFill;
-    _avatar.clipsToBounds = YES;
-    _avatar.image = [UIImage imageNamed:@"defaultAvatar"];
-}
-
-#pragma mark - Setup
-
-- (void)setBackgroundImage:(UIImage*)backgroundImage
-{
-    _backgroundImage = backgroundImage;
-    _originalBackgroundImage = backgroundImage;
-    
-    if (_backgroundImage && !_backgroundImageView)
-    {
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.bounds];
-        imageView.contentMode = UIViewContentModeScaleAspectFill;
-        imageView.clipsToBounds = YES;
-        imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        [self insertSubview:imageView atIndex:0];
-        [imageView addSubview:_avatar];
-        _backgroundImageView = imageView;
-    }
-    
-    _backgroundImageView.image = _backgroundImage;
+    UIImage *_originalBackgroundImage;
 }
 
 #pragma mark - Public
 
-- (void)offsetDidUpdate:(CGPoint)newOffset
++ (Class)backgroundImageViewClass
 {
-    _offset = newOffset.y;
-    [self _updateBlur:newOffset];
+    return [UIImageView class];
+}
+
+- (instancetype)initWithFullsizeHeight:(CGFloat)fullsizeHeight shrinkedHeight:(CGFloat)shrinkedHeight
+{
+    if (self = [super initWithFrame:CGRectZero]) {
+        _originalHeight = fullsizeHeight;
+        _shrinkHeight = shrinkedHeight;
+        
+        _backgroundImageView = [[[[self class] backgroundImageViewClass] alloc] initWithFrame:CGRectZero];
+        _backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _backgroundImageView.clipsToBounds = YES;
+        _backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        [self addSubview:_backgroundImageView];
+
+        UIView *shrinkSuperview = [[UIView alloc] initWithFrame:CGRectZero];
+        _shrinkedContentView = [[UIView alloc] initWithFrame:CGRectZero];
+        shrinkSuperview.clipsToBounds = YES;
+        [shrinkSuperview addSubview:_shrinkedContentView];
+        [self addSubview:shrinkSuperview];
+    }
+    
+    return self;
+}
+
+- (void)resetBackgroundImage
+{
+    _originalBackgroundImage = nil;
+}
+
+- (void)tableView:(UITableView *)tableView didUpdateContentOffset:(CGPoint)newOffset
+{
+    [self _updateBackgroundImageViewBlur:newOffset];
+
     if (newOffset.y <= 0) {
         CGAffineTransform translate = CGAffineTransformMakeTranslation(0, newOffset.y);
         CGFloat scaleFactor = (_originalHeight - 2 * newOffset.y) / _originalHeight;
         CGAffineTransform translateAndZoom = CGAffineTransformScale(translate, scaleFactor, scaleFactor);
         _backgroundImageView.transform = translateAndZoom;
     }
+    
+    if (newOffset.y > 0) {
+        [tableView beginUpdates];
+        CGRect headerViewRect = self.frame;
+        headerViewRect.origin = CGPointZero;
+        headerViewRect.size.height = MAX(_originalHeight - newOffset.y, _shrinkHeight);
+        self.frame = headerViewRect;
+        [tableView endUpdates];
+    }
+
+    // TODO: needed?
+//    [self _updateShrinkedContentViewFrame];
 }
 
-- (void)_updateBlur:(CGPoint)newOffset
+#pragma mark - Private
+
+- (void)layoutSubviews
 {
+    [super layoutSubviews];
+    _shrinkedContentView.superview.frame = self.bounds;
+
+    [self _updateShrinkedContentViewFrame];
+    if (self.onLayout) {
+        self.onLayout(self, _fullsizeContentView, _shrinkedContentView);
+    }
+}
+
+- (void)_updateShrinkedContentViewFrame
+{
+    CGFloat yPosition = 2 * (self.frame.size.height - _shrinkHeight);
+    _shrinkedContentView.superview.frame = self.bounds;
+    _shrinkedContentView.frame = CGRectMake(0, yPosition, _shrinkedContentView.superview.bounds.size.width, _shrinkHeight);
+}
+
+- (void)_updateBackgroundImageViewBlur:(CGPoint)newOffset
+{
+    if (!_backgroundImageView.image) {
+        return;
+    }
+    
+    if (!_originalBackgroundImage) {
+        _originalBackgroundImage = _backgroundImageView.image;
+    }
+    
     if (newOffset.y <= 0) {
         float radius = -newOffset.y / 40.0;
-        self.backgroundImageView.image = [self.originalBackgroundImage applyBlurWithRadius:radius
-                                                                                 tintColor:nil
-                                                                     saturationDeltaFactor:1.0
-                                                                                 maskImage:nil];
+        self.backgroundImageView.image = [_originalBackgroundImage applyBlurWithRadius:radius
+                                                                             tintColor:nil
+                                                                 saturationDeltaFactor:1.0
+                                                                             maskImage:nil];
     }
 }
 

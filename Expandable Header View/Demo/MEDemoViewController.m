@@ -30,65 +30,82 @@
 #import <Foundation/Foundation.h>
 
 @interface MEDemoViewController () <UITableViewDataSource, UITableViewDelegate>
-
 @property(nonatomic, strong) MEExpandableHeaderView *headerView;
-@property(nonatomic, strong) UIView *headerViewClipToBoundsSubview;
-@property(nonatomic, strong) UIView *headerViewShrinkedContent;
 @property(nonatomic, strong) IBOutlet UITableView *tableView;
-
 @property(nonatomic, retain) NSArray *elementsList;
-
 @end
 
 @implementation MEDemoViewController
+{
+    UIImageView *_avatar;
+    UILabel *_shrinkedLabel;
+}
 
 #pragma mark - View controller lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self setupElements];
-    [self setupHeaderView];
     self.navigationItem.title = @"Profile";
+    self.elementsList = @[@"Row 1", @"Row 2", @"Row 3", @"Row 4",
+                          @"Row 5", @"Row 6", @"Row 7", @"Row 8",
+                          @"Row 9", @"Row 10", @"Row 11", @"Row 12",
+                          @"Row 13", @"Row 14", @"Row 15", @"Row 16",
+                          @"Row 17", @"Row 18", @"Row 19", @"Row 20",
+                          @"Row 21", @"Row 22", @"Row 23", @"Row 24",
+                          @"Row 25", @"Row 26", @"Row 27", @"Row 28",
+                          @"Row 29", @"Row 30", @"Row 31", @"Row 32",
+                          @"Row 33", @"Row 34", @"Row 35", @"Row 36",
+                          @"Row 37", @"Row 38", @"Row 38", @"Row 40"];
+
+    [self setupHeaderView];
 }
 
-#pragma mark - Setup
+#pragma mark - IMPORTANT: Header View Use
 
 static const CGFloat kShrinkSize = 30.0f;
 static const CGFloat kFullSize = 180.0f;
 - (void)setupHeaderView
 {
-    _headerView = [[MEExpandableHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, kFullSize)];
-    self.headerView.backgroundImage = [UIImage imageNamed:@"beach"];
-    [self.headerView addSubview:({
-        UIView *clipToBoundsSubview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, kFullSize)];
-        clipToBoundsSubview.backgroundColor = UIColor.clearColor;
-        self.headerViewShrinkedContent = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, kShrinkSize)];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, kShrinkSize)];
-        label.text = @"PLZ Refactor ME!";
-        label.font = [UIFont systemFontOfSize:24.0f];
-        label.contentMode = UIViewContentModeCenter;
-        [self.headerViewShrinkedContent addSubview:label];
-        clipToBoundsSubview.clipsToBounds = YES;
-        [clipToBoundsSubview addSubview:self.headerViewShrinkedContent];
-        self.headerViewClipToBoundsSubview = clipToBoundsSubview;
+    _headerView = [[MEExpandableHeaderView alloc] initWithFullsizeHeight:kFullSize shrinkedHeight:kShrinkSize];
+
+    // Background Image is going to be Scaled & Blured
+    self.headerView.backgroundImageView.image = [UIImage imageNamed:@"beach"];
+
+    // shrinkedContentView has fixed height and becomes visible when headerView is collapsed
+    [self.headerView.shrinkedContentView addSubview:({
+        _shrinkedLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, kShrinkSize)];
+        _shrinkedLabel.text = @"PLZ Refactor ME!";
+        _shrinkedLabel.font = [UIFont systemFontOfSize:24.0f];
+        _shrinkedLabel.contentMode = UIViewContentModeCenter;
+        _shrinkedLabel;
     })];
-}
 
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    self.headerViewClipToBoundsSubview.frame = self.headerView.bounds;
+    // fullsizeContentView has fixed height and is hidden when headerView is collapsed
+    [self.headerView.fullsizeContentView addSubview:({
+        _avatar = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _avatar.contentMode = UIViewContentModeScaleToFill;
+        _avatar.clipsToBounds = YES;
+        _avatar.image = [UIImage imageNamed:@"defaultAvatar"];
+        _avatar;
+    })];
 
-    [self _updateShrinkViewPosition];
-}
+    // Use onLayout to customize layout of your subviews within header
+    __weak __typeof(self) weakSelf = self;
+    self.headerView.onLayout = ^(UIView *headerView, UIView *fullsizeContentView, UIView *shrinkedContentView) {
+        __strong __typeof(self) strongSelf = weakSelf;
+        UIImageView *avatar = strongSelf->_avatar;
+        static CGFloat kTopMargin = 30.0f;
+        CGFloat kAvatarSize = 128.0f;
+        CGFloat bW = fullsizeContentView.bounds.size.width;
+        avatar.frame = CGRectMake(0.5f * (bW - kAvatarSize), kTopMargin, kAvatarSize, kAvatarSize);
+        avatar.layer.cornerRadius = 0.5f * kAvatarSize;
+        avatar.layer.borderColor = UIColor.whiteColor.CGColor;
+        avatar.layer.borderWidth = 6.0f;
+    };
 
-- (void)_updateShrinkViewPosition
-{
-    CGFloat yPosition = 2 * (self.headerView.frame.size.height - kShrinkSize);
-    self.headerViewClipToBoundsSubview.frame = self.headerView.bounds;
-    self.headerViewShrinkedContent.frame = CGRectMake(0, yPosition, self.headerViewShrinkedContent.superview.bounds.size.width, kShrinkSize);
+    // Set frame after initializing subviews to update layout.
+    _headerView.frame = CGRectMake(0, 0, self.tableView.bounds.size.width, kFullSize);
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -98,65 +115,26 @@ static const CGFloat kFullSize = 180.0f;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    // ATTENTION: use headerView frame height in order to enable Shrinking/Collapsing of the Header
     return self.headerView.frame.size.height;
 }
 
-- (void)setupElements
-{
-    static NSUInteger const kElementsCount = 40;
-    
-    NSMutableArray *elementsList = [NSMutableArray arrayWithCapacity:kElementsCount];
-    
-    for (NSUInteger index = 1; index <= kElementsCount; index++)
-    {
-        [elementsList addObject:[NSString stringWithFormat:@"Row %lu", (unsigned long)index]];
-    }
-    
-    self.elementsList = [NSArray arrayWithArray:elementsList];
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [self.elementsList count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *cellIdentifier = @"defaultCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    NSString *rowText = [self.elementsList objectAtIndex:indexPath.row];
-    cell.textLabel.text = rowText;
-    return cell;
-}
-
-#pragma mark - Table view delegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 44.0f;
-}
-
-#pragma mark - UIScrollViewDelegate
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [self.headerView offsetDidUpdate:scrollView.contentOffset];
-    if (scrollView.contentOffset.y > 0) {
-        [self.tableView beginUpdates];
-        CGRect headerViewRect = self.headerView.frame;
-        headerViewRect.origin = CGPointZero;
-        headerViewRect.size.height = MAX(self.headerView.originalHeight - scrollView.contentOffset.y, kShrinkSize);
-        self.headerView.frame = headerViewRect;
-        [self.tableView endUpdates];
-    }
-    [self _updateShrinkViewPosition];
+    // ATTENTION: call this method to enable stretching & collapsing of headerView
+    [self.headerView tableView:self.tableView didUpdateContentOffset:scrollView.contentOffset];
+}
+
+#pragma mark - Table View Example Stuff - not Important
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath { return 44.0f; }
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView { return 1; }
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section { return _elementsList.count; }
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"defaultCell"];
+    cell.textLabel.text =  _elementsList[indexPath.row];
+    return cell;
 }
 
 @end
