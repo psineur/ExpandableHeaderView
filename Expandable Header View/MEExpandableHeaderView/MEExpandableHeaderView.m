@@ -82,10 +82,13 @@
     [self _updateBackgroundImageViewBlur:newOffset];
 
     if (newOffset.y <= 0) {
-        CGAffineTransform translate = CGAffineTransformMakeTranslation(0, newOffset.y);
         CGFloat scaleFactor = (_originalHeight - 2 * newOffset.y) / _originalHeight;
-        CGAffineTransform translateAndZoom = CGAffineTransformScale(translate, scaleFactor, scaleFactor);
-        _backgroundImageView.transform = translateAndZoom;
+        _backgroundImageView.frame = CGRectMake(newOffset.y,
+                                                newOffset.y,
+                                                self.bounds.size.width * scaleFactor,
+                                                self.bounds.size.height * scaleFactor);
+    } else {
+        _backgroundImageView.frame = self.bounds;
     }
     
     CGRect headerViewRect = self.frame;
