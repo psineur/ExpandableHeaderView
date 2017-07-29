@@ -88,11 +88,12 @@
         _backgroundImageView.transform = translateAndZoom;
     }
     
-    if (newOffset.y > 0) {
+    CGRect headerViewRect = self.frame;
+    headerViewRect.origin = CGPointZero;
+    headerViewRect.size.height = MAX(_originalHeight - newOffset.y, _shrinkHeight);
+    headerViewRect.size.height = MIN(_originalHeight, headerViewRect.size.height);
+    if (!CGRectEqualToRect(self.frame, headerViewRect)) {
         [tableView beginUpdates];
-        CGRect headerViewRect = self.frame;
-        headerViewRect.origin = CGPointZero;
-        headerViewRect.size.height = MAX(_originalHeight - newOffset.y, _shrinkHeight);
         self.frame = headerViewRect;
         [tableView endUpdates];
     }
@@ -129,12 +130,14 @@
         _originalBackgroundImage = _backgroundImageView.image;
     }
     
-    if (newOffset.y <= 0) {
+    if (newOffset.y < 0) {
         float radius = -newOffset.y / 40.0;
         self.backgroundImageView.image = [_originalBackgroundImage applyBlurWithRadius:radius
                                                                              tintColor:nil
                                                                  saturationDeltaFactor:1.0
                                                                              maskImage:nil];
+    } else {
+        self.backgroundImageView.image = _originalBackgroundImage;
     }
 }
 

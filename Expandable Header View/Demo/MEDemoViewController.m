@@ -81,12 +81,16 @@ static const CGFloat kFullSize = 180.0f;
         _shrinkedLabel.text = @"John Smith";
         _shrinkedLabel.font = [UIFont systemFontOfSize:24.0f];
         _shrinkedLabel.contentMode = UIViewContentModeCenter;
+        _shrinkedLabel.shadowColor = [UIColor whiteColor];
+        _shrinkedLabel.shadowOffset = CGSizeMake(2,2);
         _shrinkedLabel;
     })];
     [self.headerView.shrinkedContentView addSubview:({
         _shrinkedAvatar = [[UIImageView alloc] initWithFrame:CGRectZero];
         _shrinkedAvatar.contentMode = UIViewContentModeScaleToFill;
         _shrinkedAvatar.clipsToBounds = YES;
+        _shrinkedAvatar.layer.borderColor = UIColor.whiteColor.CGColor;
+        _shrinkedAvatar.layer.borderWidth = 2.0f;
         _shrinkedAvatar.image = [UIImage imageNamed:@"defaultAvatar"];
         _shrinkedAvatar;
     })];
@@ -97,6 +101,8 @@ static const CGFloat kFullSize = 180.0f;
         _label.text = @"John Smith";
         _label.font = [UIFont systemFontOfSize:32.0f];
         _label.textAlignment = NSTextAlignmentCenter;
+        _label.shadowColor = [UIColor whiteColor];
+        _label.shadowOffset = CGSizeMake(2,2);
         _label;
     })];
     [self.headerView.fullsizeContentView addSubview:({
@@ -123,6 +129,7 @@ static const CGFloat kFullSize = 180.0f;
 
         CGRect shrinkAvatarFrame = CGRectMake(0, 0, kShrinkSize, kShrinkSize);
         strongSelf->_shrinkedAvatar.frame = shrinkAvatarFrame;
+        strongSelf->_shrinkedAvatar.layer.cornerRadius = 0.5f * kShrinkSize;
         strongSelf->_shrinkedLabel.frame = CGRectMake(CGRectGetMaxX(shrinkAvatarFrame), 0, weakSelf.tableView.bounds.size.width, kShrinkSize);
     };
 
