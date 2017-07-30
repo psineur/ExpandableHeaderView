@@ -25,9 +25,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#import "MEExpandableHeaderView.h"
-#import "UIImage+ImageEffects.h"
 #import <QuartzCore/QuartzCore.h>
+#import "MEExpandableHeaderView.h"
+#import <Accelerate/Accelerate.h>
 
 @interface MEExpandableHeaderView()
 @end
@@ -134,14 +134,92 @@
     }
     
     if (newOffset.y < 0) {
-        float radius = -newOffset.y / 40.0;
-        self.backgroundImageView.image = [_originalBackgroundImage applyBlurWithRadius:radius
-                                                                             tintColor:nil
-                                                                 saturationDeltaFactor:1.0
-                                                                             maskImage:nil];
+        float radius = 2 - newOffset.y / 10.0;
+        self.backgroundImageView.image = [self _blurImage:_originalBackgroundImage withRadius:radius iterations:1 ratio:1.0f blendColor:nil blendMode:kCGBlendModeNormal];
     } else {
         self.backgroundImageView.image = _originalBackgroundImage;
     }
+}
+
+// Objective-C version of UIImage category from DynamicBlurView (https://github.com/KyoheiG3/DynamicBlurView/)
+// by Kyohei Ito - je.suis.kyohei@gmail.com
+- (UIImage *)_blurImage:(UIImage *)image
+             withRadius:(CGFloat)radius
+             iterations:(int)iterations
+                  ratio:(CGFloat)ratio
+             blendColor:(UIColor * _Nullable)blendColor
+              blendMode:(CGBlendMode)blendMode
+{
+    if (floorf(image.size.width) * floorf(image.size.height) <= 0.0 || radius <= 0) {
+        return image;
+    }
+    
+    CGImageRef imageRef = image.CGImage;
+    if (!imageRef) {
+        return nil;
+    }
+    
+    uint32_t boxSize = (uint32_t)(radius * image.scale * ratio);
+    if (boxSize % 2 == 0) {
+        boxSize += 1;
+    }
+
+    size_t width = CGImageGetWidth(imageRef);
+    size_t height = CGImageGetHeight(imageRef);
+    size_t rowBytes = CGImageGetBytesPerRow(imageRef);
+    size_t bytes = rowBytes * height;
+
+    void *inData = malloc(bytes);
+    vImage_Buffer inBuffer = {inData, (vImagePixelCount)height, (vImagePixelCount)width, rowBytes};
+    void *outData = malloc(bytes);
+    vImage_Buffer outBuffer = {outData, (vImagePixelCount)height, (vImagePixelCount)width, rowBytes};
+
+    vImage_Flags tempFlags = kvImageEdgeExtend | kvImageGetTempBufferSize;
+    vImage_Error tempSize = vImageBoxConvolve_ARGB8888(&inBuffer, &outBuffer, nil, 0, 0, boxSize, boxSize, nil, tempFlags);
+    void *tempBuffer = malloc(tempSize);
+
+    @try {
+        CGDataProviderRef provider = CGImageGetDataProvider(imageRef);
+        if (!provider) {
+            return nil;
+        }
+        CFDataRef copy = CGDataProviderCopyData(provider);
+        const UInt8 *source = CFDataGetBytePtr(copy);
+        memcpy(inBuffer.data, source, bytes);
+        
+        vImage_Flags flags = kvImageEdgeExtend;
+        for (int i = 0; i < iterations; ++i) {
+            vImageBoxConvolve_ARGB8888(&inBuffer, &outBuffer, tempBuffer, 0, 0, boxSize, boxSize, nil, flags);
+            void *temp = inBuffer.data;
+            inBuffer.data = outBuffer.data;
+            outBuffer.data = temp;
+        }
+        CGColorSpaceRef colorSpace = CGImageGetColorSpace(imageRef);
+        if (!colorSpace) {
+            return nil;
+        }
+        CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
+        CGContextRef bitmapContext = CGBitmapContextCreate(inBuffer.data, width, height, 8, rowBytes, colorSpace, bitmapInfo);
+        if (!bitmapContext) {
+            return nil;
+        }
+        UIColor *color = blendColor;
+        if (color) {
+            CGContextSetFillColorWithColor(bitmapContext, color.CGColor);
+            CGContextSetBlendMode(bitmapContext, blendMode);
+            CGContextFillRect(bitmapContext, CGRectMake(0, 0, width, height));
+        }
+        CGImageRef bitmap = CGBitmapContextCreateImage(bitmapContext);
+        if (bitmap) {
+            return [UIImage imageWithCGImage:bitmap scale:image.scale orientation:image.imageOrientation];
+        }
+    } @catch (NSException *exception) {} @finally {
+        free(outBuffer.data);
+        free(tempBuffer);
+        free(inBuffer.data);
+    }
+
+    return nil;
 }
 
 @end

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E711ECC9194B563E00B3687A /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = E711ECC8194B563E00B3687A /* UIImage+ImageEffects.m */; };
 		E7349C691D4A5C02008C1274 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7349C681D4A5C02008C1274 /* Storyboard.storyboard */; };
 		E7349C6E1D4A9184008C1274 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7349C6D1D4A9184008C1274 /* Launch Screen.storyboard */; };
 		E75A297B1947654B003E3AE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75A297A1947654B003E3AE8 /* Foundation.framework */; };
@@ -37,8 +36,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E711ECC7194B563E00B3687A /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
-		E711ECC8194B563E00B3687A /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		E7349C681D4A5C02008C1274 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		E7349C6D1D4A9184008C1274 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		E75A29771947654B003E3AE8 /* Expandable Header View.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Expandable Header View.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,15 +84,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E711ECC6194B563E00B3687A /* ThirdParty */ = {
-			isa = PBXGroup;
-			children = (
-				E711ECC7194B563E00B3687A /* UIImage+ImageEffects.h */,
-				E711ECC8194B563E00B3687A /* UIImage+ImageEffects.m */,
-			);
-			path = ThirdParty;
-			sourceTree = "<group>";
-		};
 		E75A296E1947654B003E3AE8 = {
 			isa = PBXGroup;
 			children = (
@@ -182,7 +170,6 @@
 		E77AFA48194A545000606ACE /* MEExpandableHeaderView */ = {
 			isa = PBXGroup;
 			children = (
-				E711ECC6194B563E00B3687A /* ThirdParty */,
 				E77AFA49194A546900606ACE /* MEExpandableHeaderView.h */,
 				E77AFA4A194A546900606ACE /* MEExpandableHeaderView.m */,
 			);
@@ -288,7 +275,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E77AFA4B194A546900606ACE /* MEExpandableHeaderView.m in Sources */,
-				E711ECC9194B563E00B3687A /* UIImage+ImageEffects.m in Sources */,
 				E75A298B1947654C003E3AE8 /* MEAppDelegate.m in Sources */,
 				E75A29871947654C003E3AE8 /* main.m in Sources */,
 				E77AFA4F194A55A600606ACE /* MEDemoViewController.m in Sources */,
