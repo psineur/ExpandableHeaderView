@@ -28,6 +28,42 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *
+ * Usage: 
+ * 
+ * First create SUPHeaderView with valid sizes:
+ * _headerView = [[SUPHeaderView alloc] initWithFullsizeHeight:140 shrinkedHeight:60];
+ * _headerView.backgroundView.image = [UIImage imageNamed:@"someImage"];
+ * 
+ * To add content into fullsize mode of the headerView - use:
+ *   _headerView.fullsizeContentView
+ * For shrinked:
+ *   _headerView.shrinkedContentView 
+ *
+ * You can use onLayout() block property to customize layout of your views within fullsizeContentView
+ * and shrinkedContentView
+ * 
+ * After initializing SUPHeaderView with content and custom layout - set it's frame to trigger initial layout.
+ *
+ * After that all you need to do is to integrate it into your tableView, but implementing following methods:
+ *
+ * - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+ * {
+ *   return _headerView;
+ * }
+ *
+ *
+ * - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+ * {
+ *     return self.headerView.frame.size.height;
+ * }
+ * 
+ * - (void)scrollViewDidScroll:(UIScrollView *)scrollView
+ * {
+ *     [self.headerView tableView:self.tableView didUpdateContentOffset:scrollView.contentOffset];
+ * }
+ */
 @interface SUPHeaderView : UIView
 
 @property(nonatomic, assign, readonly) CGFloat originalHeight;

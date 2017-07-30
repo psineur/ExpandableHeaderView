@@ -19,12 +19,54 @@ when the user scrolls down that section and the header is expanded and blurred, 
 and header collapses and shows minimum info with smaller UI.
 
 
+## Usage
+
+First create SUPHeaderView with valid sizes:
+
+```
+  _headerView = [[SUPHeaderView alloc] initWithFullsizeHeight:140 shrinkedHeight:60];
+  _headerView.backgroundView.image = [UIImage imageNamed:@"someImage"];
+```
+
+To add content into fullsize mode of the headerView - use:
+```
+  _headerView.fullsizeContentView
+```
+
+For shrinked:
+```
+  _headerView.shrinkedContentView 
+```
+
+You can use onLayout() block property to customize layout of your views within fullsizeContentView
+and shrinkedContentView.
+After initializing SUPHeaderView with content and custom layout - set it's frame to trigger initial layout.
+After that all you need to do is to integrate it into your tableView, but implementing following methods:
+
+```
+  - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+  {
+    return _headerView;
+  }
+
+
+  - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+  {
+    return self.headerView.frame.size.height;
+  }
+
+  - (void)scrollViewDidScroll:(UIScrollView *)scrollView
+  {
+    [self.headerView tableView:self.tableView didUpdateContentOffset:scrollView.contentOffset];
+  }
+```
+
 ## Requirements
 UIKit, Accelerate, iOS >= 8
 
 ## Installation
 
-${POD_NAME} is available through [CocoaPods](http://cocoapods.org). To install
+SUPHeaderView is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
