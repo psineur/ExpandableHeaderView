@@ -84,9 +84,10 @@
 
     if (newOffset.y <= 0) {
         CGFloat scaleFactor = (_originalHeight - 2 * newOffset.y) / _originalHeight;
-        _backgroundImageView.frame = CGRectMake(newOffset.y,
+        CGFloat newWidth = self.bounds.size.width * scaleFactor;
+        _backgroundImageView.frame = CGRectMake(0.5f * (self.bounds.size.width - newWidth),
                                                 newOffset.y,
-                                                self.bounds.size.width * scaleFactor,
+                                                newWidth,
                                                 self.bounds.size.height * scaleFactor);
     } else {
         _backgroundImageView.frame = self.bounds;
