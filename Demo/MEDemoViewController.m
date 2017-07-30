@@ -26,11 +26,11 @@
 // SOFTWARE.
 
 #import "MEDemoViewController.h"
-#import "MEExpandableHeaderView.h"
+#import "SUPHeaderView.h"
 #import <Foundation/Foundation.h>
 
 @interface MEDemoViewController () <UITableViewDataSource, UITableViewDelegate>
-@property(nonatomic, strong) MEExpandableHeaderView *headerView;
+@property(nonatomic, strong) SUPHeaderView *headerView;
 @property(nonatomic, strong) IBOutlet UITableView *tableView;
 @property(nonatomic, retain) NSArray *elementsList;
 @end
@@ -70,7 +70,7 @@ static const CGFloat kShrinkSize = 30.0f;
 static const CGFloat kFullSize = 180.0f;
 - (void)setupHeaderView
 {
-    _headerView = [[MEExpandableHeaderView alloc] initWithFullsizeHeight:kFullSize shrinkedHeight:kShrinkSize];
+    _headerView = [[SUPHeaderView alloc] initWithFullsizeHeight:kFullSize shrinkedHeight:kShrinkSize];
 
     // Background Image is going to be Scaled & Blured
     self.headerView.backgroundImageView.image = [UIImage imageNamed:@"beach"];

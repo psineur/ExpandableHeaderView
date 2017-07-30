@@ -17,15 +17,18 @@
 		E75A29871947654C003E3AE8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E75A29861947654C003E3AE8 /* main.m */; };
 		E75A298B1947654C003E3AE8 /* MEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E75A298A1947654C003E3AE8 /* MEAppDelegate.m */; };
 		E75A298D1947654C003E3AE8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E75A298C1947654C003E3AE8 /* Images.xcassets */; };
-		E77AFA4B194A546900606ACE /* MEExpandableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E77AFA4A194A546900606ACE /* MEExpandableHeaderView.m */; };
+		E77AFA4B194A546900606ACE /* SUPHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E77AFA4A194A546900606ACE /* SUPHeaderView.m */; };
 		E77AFA4F194A55A600606ACE /* MEDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E77AFA4D194A55A600606ACE /* MEDemoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6D477A921F2D5D47002147A2 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		6D477A941F2D6443002147A2 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		6D477A961F2D6443002147A2 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		6D477A971F2D656C002147A2 /* SUPHeaderView.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = SUPHeaderView.podspec; sourceTree = "<group>"; };
 		E7349C681D4A5C02008C1274 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		E7349C6D1D4A9184008C1274 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		E75A29771947654B003E3AE8 /* Expandable Header View.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Expandable Header View.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E75A29771947654B003E3AE8 /* SUPHeaderView Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SUPHeaderView Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E75A297A1947654B003E3AE8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E75A297C1947654B003E3AE8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		E75A297E1947654B003E3AE8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -36,8 +39,8 @@
 		E75A29891947654C003E3AE8 /* MEAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MEAppDelegate.h; sourceTree = "<group>"; };
 		E75A298A1947654C003E3AE8 /* MEAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MEAppDelegate.m; sourceTree = "<group>"; };
 		E75A298C1947654C003E3AE8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		E77AFA49194A546900606ACE /* MEExpandableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEExpandableHeaderView.h; sourceTree = "<group>"; };
-		E77AFA4A194A546900606ACE /* MEExpandableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEExpandableHeaderView.m; sourceTree = "<group>"; };
+		E77AFA49194A546900606ACE /* SUPHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUPHeaderView.h; sourceTree = "<group>"; };
+		E77AFA4A194A546900606ACE /* SUPHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUPHeaderView.m; sourceTree = "<group>"; };
 		E77AFA4C194A55A600606ACE /* MEDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEDemoViewController.h; sourceTree = "<group>"; };
 		E77AFA4D194A55A600606ACE /* MEDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEDemoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,7 +63,12 @@
 		E75A296E1947654B003E3AE8 = {
 			isa = PBXGroup;
 			children = (
-				E75A29801947654B003E3AE8 /* Expandable Header View */,
+				6D477A961F2D6443002147A2 /* README.md */,
+				6D477A971F2D656C002147A2 /* SUPHeaderView.podspec */,
+				6D477A941F2D6443002147A2 /* LICENSE */,
+				E77AFA47194A545000606ACE /* Demo */,
+				E77AFA48194A545000606ACE /* SUPHeaderView */,
+				E75A29811947654C003E3AE8 /* Supporting Files */,
 				E75A29791947654B003E3AE8 /* Frameworks */,
 				E75A29781947654B003E3AE8 /* Products */,
 			);
@@ -69,7 +77,7 @@
 		E75A29781947654B003E3AE8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E75A29771947654B003E3AE8 /* Expandable Header View.app */,
+				E75A29771947654B003E3AE8 /* SUPHeaderView Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -84,16 +92,6 @@
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
-		};
-		E75A29801947654B003E3AE8 /* Expandable Header View */ = {
-			isa = PBXGroup;
-			children = (
-				E77AFA47194A545000606ACE /* Demo */,
-				E77AFA48194A545000606ACE /* MEExpandableHeaderView */,
-				E75A29811947654C003E3AE8 /* Supporting Files */,
-			);
-			name = "Expandable Header View";
-			sourceTree = SOURCE_ROOT;
 		};
 		E75A29811947654C003E3AE8 /* Supporting Files */ = {
 			isa = PBXGroup;
@@ -121,21 +119,21 @@
 			path = Demo;
 			sourceTree = "<group>";
 		};
-		E77AFA48194A545000606ACE /* MEExpandableHeaderView */ = {
+		E77AFA48194A545000606ACE /* SUPHeaderView */ = {
 			isa = PBXGroup;
 			children = (
-				E77AFA49194A546900606ACE /* MEExpandableHeaderView.h */,
-				E77AFA4A194A546900606ACE /* MEExpandableHeaderView.m */,
+				E77AFA49194A546900606ACE /* SUPHeaderView.h */,
+				E77AFA4A194A546900606ACE /* SUPHeaderView.m */,
 			);
-			path = MEExpandableHeaderView;
+			path = SUPHeaderView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E75A29761947654B003E3AE8 /* Expandable Header View */ = {
+		E75A29761947654B003E3AE8 /* SUPHeaderView Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E75A29A31947654C003E3AE8 /* Build configuration list for PBXNativeTarget "Expandable Header View" */;
+			buildConfigurationList = E75A29A31947654C003E3AE8 /* Build configuration list for PBXNativeTarget "SUPHeaderView Demo" */;
 			buildPhases = (
 				E75A29731947654B003E3AE8 /* Sources */,
 				E75A29741947654B003E3AE8 /* Frameworks */,
@@ -145,9 +143,9 @@
 			);
 			dependencies = (
 			);
-			name = "Expandable Header View";
+			name = "SUPHeaderView Demo";
 			productName = "Expandable Header View";
-			productReference = E75A29771947654B003E3AE8 /* Expandable Header View.app */;
+			productReference = E75A29771947654B003E3AE8 /* SUPHeaderView Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -165,7 +163,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E75A29721947654B003E3AE8 /* Build configuration list for PBXProject "Expandable Header View" */;
+			buildConfigurationList = E75A29721947654B003E3AE8 /* Build configuration list for PBXProject "SUPHeaderView" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -177,7 +175,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E75A29761947654B003E3AE8 /* Expandable Header View */,
+				E75A29761947654B003E3AE8 /* SUPHeaderView Demo */,
 			);
 		};
 /* End PBXProject section */
@@ -201,7 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E77AFA4B194A546900606ACE /* MEExpandableHeaderView.m in Sources */,
+				E77AFA4B194A546900606ACE /* SUPHeaderView.m in Sources */,
 				E75A298B1947654C003E3AE8 /* MEAppDelegate.m in Sources */,
 				E75A29871947654C003E3AE8 /* main.m in Sources */,
 				E77AFA4F194A55A600606ACE /* MEDemoViewController.m in Sources */,
@@ -324,7 +322,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E75A29721947654B003E3AE8 /* Build configuration list for PBXProject "Expandable Header View" */ = {
+		E75A29721947654B003E3AE8 /* Build configuration list for PBXProject "SUPHeaderView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E75A29A11947654C003E3AE8 /* Debug */,
@@ -333,7 +331,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E75A29A31947654C003E3AE8 /* Build configuration list for PBXNativeTarget "Expandable Header View" */ = {
+		E75A29A31947654C003E3AE8 /* Build configuration list for PBXNativeTarget "SUPHeaderView Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E75A29A41947654C003E3AE8 /* Debug */,

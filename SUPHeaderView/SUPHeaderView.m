@@ -1,11 +1,12 @@
 //
-//  MEExpandableHeaderView.m
+//  SUPHeaderView.m
 //  Expandable Header View
 //
 // 
 // The MIT License (MIT)
 // 
 // Copyright (c) 2014-2016 Pablo Ezequiel Romero
+// Copyright (c) 2017 Stepan Generalov
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,13 +27,13 @@
 // SOFTWARE.
 
 #import <QuartzCore/QuartzCore.h>
-#import "MEExpandableHeaderView.h"
+#import "SUPHeaderView.h"
 #import <Accelerate/Accelerate.h>
 
-@interface MEExpandableHeaderView()
+@interface SUPHeaderView()
 @end
 
-@implementation MEExpandableHeaderView
+@implementation SUPHeaderView
 {
     UIImage *_originalBackgroundImage;
 }

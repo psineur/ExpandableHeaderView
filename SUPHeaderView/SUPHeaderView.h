@@ -1,11 +1,12 @@
 //
-//  MEExpandableHeaderView.h
+//  SUPHeaderView.h
 //  Expandable Header View
 //
 // 
 // The MIT License (MIT)
 // 
 // Copyright (c) 2014-2016 Pablo Ezequiel Romero
+// Copyright (c) 2017 Stepan Generalov
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +28,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MEExpandableHeaderView : UIView
+@interface SUPHeaderView : UIView
 
 @property(nonatomic, assign, readonly) CGFloat originalHeight;
 @property(nonatomic, assign, readonly) CGFloat shrinkHeight;
