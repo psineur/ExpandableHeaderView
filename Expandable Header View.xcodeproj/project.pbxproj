@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D477A931F2D5D47002147A2 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D477A921F2D5D47002147A2 /* Accelerate.framework */; };
 		E7349C691D4A5C02008C1274 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7349C681D4A5C02008C1274 /* Storyboard.storyboard */; };
 		E7349C6E1D4A9184008C1274 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7349C6D1D4A9184008C1274 /* Launch Screen.storyboard */; };
 		E75A297B1947654B003E3AE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75A297A1947654B003E3AE8 /* Foundation.framework */; };
@@ -16,26 +17,12 @@
 		E75A29871947654C003E3AE8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E75A29861947654C003E3AE8 /* main.m */; };
 		E75A298B1947654C003E3AE8 /* MEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E75A298A1947654C003E3AE8 /* MEAppDelegate.m */; };
 		E75A298D1947654C003E3AE8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E75A298C1947654C003E3AE8 /* Images.xcassets */; };
-		E75A29941947654C003E3AE8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75A29931947654C003E3AE8 /* XCTest.framework */; };
-		E75A29951947654C003E3AE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75A297A1947654B003E3AE8 /* Foundation.framework */; };
-		E75A29961947654C003E3AE8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75A297E1947654B003E3AE8 /* UIKit.framework */; };
-		E75A299E1947654C003E3AE8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E75A299C1947654C003E3AE8 /* InfoPlist.strings */; };
-		E75A29A01947654C003E3AE8 /* Expandable_Header_ViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E75A299F1947654C003E3AE8 /* Expandable_Header_ViewTests.m */; };
 		E77AFA4B194A546900606ACE /* MEExpandableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E77AFA4A194A546900606ACE /* MEExpandableHeaderView.m */; };
 		E77AFA4F194A55A600606ACE /* MEDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E77AFA4D194A55A600606ACE /* MEDemoViewController.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		E75A29971947654C003E3AE8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E75A296F1947654B003E3AE8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E75A29761947654B003E3AE8;
-			remoteInfo = "Expandable Header View";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		6D477A921F2D5D47002147A2 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		E7349C681D4A5C02008C1274 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		E7349C6D1D4A9184008C1274 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		E75A29771947654B003E3AE8 /* Expandable Header View.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Expandable Header View.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,11 +36,6 @@
 		E75A29891947654C003E3AE8 /* MEAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MEAppDelegate.h; sourceTree = "<group>"; };
 		E75A298A1947654C003E3AE8 /* MEAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MEAppDelegate.m; sourceTree = "<group>"; };
 		E75A298C1947654C003E3AE8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		E75A29921947654C003E3AE8 /* Expandable Header ViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Expandable Header ViewTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E75A29931947654C003E3AE8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		E75A299B1947654C003E3AE8 /* Expandable Header ViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Expandable Header ViewTests-Info.plist"; sourceTree = "<group>"; };
-		E75A299D1947654C003E3AE8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E75A299F1947654C003E3AE8 /* Expandable_Header_ViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Expandable_Header_ViewTests.m; sourceTree = "<group>"; };
 		E77AFA49194A546900606ACE /* MEExpandableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEExpandableHeaderView.h; sourceTree = "<group>"; };
 		E77AFA4A194A546900606ACE /* MEExpandableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEExpandableHeaderView.m; sourceTree = "<group>"; };
 		E77AFA4C194A55A600606ACE /* MEDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEDemoViewController.h; sourceTree = "<group>"; };
@@ -65,19 +47,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D477A931F2D5D47002147A2 /* Accelerate.framework in Frameworks */,
 				E75A297D1947654B003E3AE8 /* CoreGraphics.framework in Frameworks */,
 				E75A297F1947654B003E3AE8 /* UIKit.framework in Frameworks */,
 				E75A297B1947654B003E3AE8 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E75A298F1947654C003E3AE8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E75A29941947654C003E3AE8 /* XCTest.framework in Frameworks */,
-				E75A29961947654C003E3AE8 /* UIKit.framework in Frameworks */,
-				E75A29951947654C003E3AE8 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +61,6 @@
 			isa = PBXGroup;
 			children = (
 				E75A29801947654B003E3AE8 /* Expandable Header View */,
-				E75A29991947654C003E3AE8 /* Expandable Header ViewTests */,
 				E75A29791947654B003E3AE8 /* Frameworks */,
 				E75A29781947654B003E3AE8 /* Products */,
 			);
@@ -98,7 +70,6 @@
 			isa = PBXGroup;
 			children = (
 				E75A29771947654B003E3AE8 /* Expandable Header View.app */,
-				E75A29921947654C003E3AE8 /* Expandable Header ViewTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -106,10 +77,10 @@
 		E75A29791947654B003E3AE8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D477A921F2D5D47002147A2 /* Accelerate.framework */,
 				E75A297A1947654B003E3AE8 /* Foundation.framework */,
 				E75A297C1947654B003E3AE8 /* CoreGraphics.framework */,
 				E75A297E1947654B003E3AE8 /* UIKit.framework */,
-				E75A29931947654C003E3AE8 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -117,48 +88,31 @@
 		E75A29801947654B003E3AE8 /* Expandable Header View */ = {
 			isa = PBXGroup;
 			children = (
-				E75A29891947654C003E3AE8 /* MEAppDelegate.h */,
-				E75A298A1947654C003E3AE8 /* MEAppDelegate.m */,
 				E77AFA47194A545000606ACE /* Demo */,
 				E77AFA48194A545000606ACE /* MEExpandableHeaderView */,
-				E75A298C1947654C003E3AE8 /* Images.xcassets */,
 				E75A29811947654C003E3AE8 /* Supporting Files */,
 			);
-			path = "Expandable Header View";
-			sourceTree = "<group>";
+			name = "Expandable Header View";
+			sourceTree = SOURCE_ROOT;
 		};
 		E75A29811947654C003E3AE8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E75A298C1947654C003E3AE8 /* Images.xcassets */,
 				E75A29821947654C003E3AE8 /* Expandable Header View-Info.plist */,
 				E75A29831947654C003E3AE8 /* InfoPlist.strings */,
 				E75A29861947654C003E3AE8 /* main.m */,
 				E75A29881947654C003E3AE8 /* Expandable Header View-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E75A29991947654C003E3AE8 /* Expandable Header ViewTests */ = {
-			isa = PBXGroup;
-			children = (
-				E75A299F1947654C003E3AE8 /* Expandable_Header_ViewTests.m */,
-				E75A299A1947654C003E3AE8 /* Supporting Files */,
-			);
-			path = "Expandable Header ViewTests";
-			sourceTree = "<group>";
-		};
-		E75A299A1947654C003E3AE8 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E75A299B1947654C003E3AE8 /* Expandable Header ViewTests-Info.plist */,
-				E75A299C1947654C003E3AE8 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
+			path = Demo;
 			sourceTree = "<group>";
 		};
 		E77AFA47194A545000606ACE /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				E75A29891947654C003E3AE8 /* MEAppDelegate.h */,
+				E75A298A1947654C003E3AE8 /* MEAppDelegate.m */,
 				E77AFA4C194A55A600606ACE /* MEDemoViewController.h */,
 				E77AFA4D194A55A600606ACE /* MEDemoViewController.m */,
 				E7349C681D4A5C02008C1274 /* Storyboard.storyboard */,
@@ -196,24 +150,6 @@
 			productReference = E75A29771947654B003E3AE8 /* Expandable Header View.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E75A29911947654C003E3AE8 /* Expandable Header ViewTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E75A29A61947654C003E3AE8 /* Build configuration list for PBXNativeTarget "Expandable Header ViewTests" */;
-			buildPhases = (
-				E75A298E1947654C003E3AE8 /* Sources */,
-				E75A298F1947654C003E3AE8 /* Frameworks */,
-				E75A29901947654C003E3AE8 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E75A29981947654C003E3AE8 /* PBXTargetDependency */,
-			);
-			name = "Expandable Header ViewTests";
-			productName = "Expandable Header ViewTests";
-			productReference = E75A29921947654C003E3AE8 /* Expandable Header ViewTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -224,8 +160,8 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = Microeditionbiz;
 				TargetAttributes = {
-					E75A29911947654C003E3AE8 = {
-						TestTargetID = E75A29761947654B003E3AE8;
+					E75A29761947654B003E3AE8 = {
+						DevelopmentTeam = BLFD65BK7L;
 					};
 				};
 			};
@@ -242,7 +178,6 @@
 			projectRoot = "";
 			targets = (
 				E75A29761947654B003E3AE8 /* Expandable Header View */,
-				E75A29911947654C003E3AE8 /* Expandable Header ViewTests */,
 			);
 		};
 /* End PBXProject section */
@@ -256,14 +191,6 @@
 				E7349C691D4A5C02008C1274 /* Storyboard.storyboard in Resources */,
 				E7349C6E1D4A9184008C1274 /* Launch Screen.storyboard in Resources */,
 				E75A298D1947654C003E3AE8 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E75A29901947654C003E3AE8 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E75A299E1947654C003E3AE8 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,37 +208,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E75A298E1947654C003E3AE8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E75A29A01947654C003E3AE8 /* Expandable_Header_ViewTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		E75A29981947654C003E3AE8 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E75A29761947654B003E3AE8 /* Expandable Header View */;
-			targetProxy = E75A29971947654C003E3AE8 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E75A29831947654C003E3AE8 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				E75A29841947654C003E3AE8 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		E75A299C1947654C003E3AE8 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E75A299D1947654C003E3AE8 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -393,9 +296,10 @@
 		E75A29A41947654C003E3AE8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = BLFD65BK7L;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Expandable Header View/Expandable Header View-Prefix.pch";
-				INFOPLIST_FILE = "Expandable Header View/Expandable Header View-Info.plist";
+				GCC_PREFIX_HEADER = "Demo/Expandable Header View-Prefix.pch";
+				INFOPLIST_FILE = "Demo/Expandable Header View-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.microedition.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -406,55 +310,14 @@
 		E75A29A51947654C003E3AE8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = BLFD65BK7L;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Expandable Header View/Expandable Header View-Prefix.pch";
-				INFOPLIST_FILE = "Expandable Header View/Expandable Header View-Info.plist";
+				GCC_PREFIX_HEADER = "Demo/Expandable Header View-Prefix.pch";
+				INFOPLIST_FILE = "Demo/Expandable Header View-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.microedition.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		E75A29A71947654C003E3AE8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Expandable Header View.app/Expandable Header View";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Expandable Header View/Expandable Header View-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Expandable Header ViewTests/Expandable Header ViewTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.microedition.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		E75A29A81947654C003E3AE8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Expandable Header View.app/Expandable Header View";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Expandable Header View/Expandable Header View-Prefix.pch";
-				INFOPLIST_FILE = "Expandable Header ViewTests/Expandable Header ViewTests-Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.microedition.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -475,15 +338,6 @@
 			buildConfigurations = (
 				E75A29A41947654C003E3AE8 /* Debug */,
 				E75A29A51947654C003E3AE8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E75A29A61947654C003E3AE8 /* Build configuration list for PBXNativeTarget "Expandable Header ViewTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E75A29A71947654C003E3AE8 /* Debug */,
-				E75A29A81947654C003E3AE8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
