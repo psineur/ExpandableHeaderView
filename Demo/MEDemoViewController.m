@@ -148,6 +148,18 @@ static const CGFloat kFullSize = 180.0f;
     return self.headerView.frame.size.height;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 30.0f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.height, 30.0f)];
+    view.backgroundColor = UIColor.redColor;
+    return view;
+}
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     // ATTENTION: call this method to enable stretching & collapsing of headerView

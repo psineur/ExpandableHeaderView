@@ -94,7 +94,6 @@
     }
     
     CGRect headerViewRect = self.frame;
-    headerViewRect.origin = CGPointZero;
     headerViewRect.size.height = MAX(_originalHeight - newOffset.y, _shrinkHeight);
     headerViewRect.size.height = MIN(_originalHeight, headerViewRect.size.height);
     if (!CGRectEqualToRect(self.frame, headerViewRect)) {
