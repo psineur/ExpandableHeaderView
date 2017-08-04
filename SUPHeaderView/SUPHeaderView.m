@@ -84,6 +84,8 @@
 
     if (newOffset.y <= 0) {
         CGFloat scaleFactor = (_originalHeight - 2 * newOffset.y) / _originalHeight;
+        CGFloat maxScaleFactor = tableView.bounds.size.height / _originalHeight;
+        scaleFactor = MIN(scaleFactor, maxScaleFactor);
         CGFloat newWidth = self.bounds.size.width * scaleFactor;
         _backgroundImageView.frame = CGRectMake(0.5f * (self.bounds.size.width - newWidth),
                                                 newOffset.y,
