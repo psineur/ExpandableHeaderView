@@ -180,12 +180,15 @@
     vImage_Error tempSize = vImageBoxConvolve_ARGB8888(&inBuffer, &outBuffer, nil, 0, 0, boxSize, boxSize, nil, tempFlags);
     void *tempBuffer = malloc(tempSize);
 
+    CFDataRef copy = NULL;
+    CGContextRef bitmapContext = NULL;
+    CGImageRef bitmap = NULL;
     @try {
         CGDataProviderRef provider = CGImageGetDataProvider(imageRef);
         if (!provider) {
             return nil;
         }
-        CFDataRef copy = CGDataProviderCopyData(provider);
+        copy = CGDataProviderCopyData(provider);
         const UInt8 *source = CFDataGetBytePtr(copy);
         memcpy(inBuffer.data, source, bytes);
         
@@ -201,7 +204,7 @@
             return nil;
         }
         CGBitmapInfo bitmapInfo = CGImageGetBitmapInfo(imageRef);
-        CGContextRef bitmapContext = CGBitmapContextCreate(inBuffer.data, width, height, 8, rowBytes, colorSpace, bitmapInfo);
+        bitmapContext = CGBitmapContextCreate(inBuffer.data, width, height, 8, rowBytes, colorSpace, bitmapInfo);
         if (!bitmapContext) {
             return nil;
         }
@@ -211,11 +214,16 @@
             CGContextSetBlendMode(bitmapContext, blendMode);
             CGContextFillRect(bitmapContext, CGRectMake(0, 0, width, height));
         }
-        CGImageRef bitmap = CGBitmapContextCreateImage(bitmapContext);
+        bitmap = CGBitmapContextCreateImage(bitmapContext);
         if (bitmap) {
             return [UIImage imageWithCGImage:bitmap scale:image.scale orientation:image.imageOrientation];
         }
     } @catch (NSException *exception) {} @finally {
+        if (copy) {
+            CFRelease(copy);
+        }
+        CGImageRelease(bitmap);
+        CGContextRelease(bitmapContext);
         free(outBuffer.data);
         free(tempBuffer);
         free(inBuffer.data);
