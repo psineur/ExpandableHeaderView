@@ -36,6 +36,8 @@
 @implementation SUPHeaderView
 {
     UIImage *_originalBackgroundImage;
+    CGFloat _zeroOffset;
+    BOOL _zeroOffsetIsSet;
 }
 
 #pragma mark - Public
@@ -80,6 +82,14 @@
 
 - (void)tableView:(UITableView *)tableView didUpdateContentOffset:(CGPoint)newOffset
 {
+    // Starting with iOS 7 - tableView will extend beyond navigation bar, status bar & possibly other system provided views.
+    // Initial offset is set once to be used as "zero"
+    if (!_zeroOffsetIsSet) {
+        _zeroOffset = newOffset.y;
+        _zeroOffsetIsSet = YES;
+    }
+    newOffset.y -= _zeroOffset;
+    
     [self _updateBackgroundImageViewBlur:newOffset];
 
     if (newOffset.y <= 0) {
@@ -87,10 +97,11 @@
         CGFloat maxScaleFactor = tableView.bounds.size.height / _originalHeight;
         scaleFactor = MIN(scaleFactor, maxScaleFactor);
         CGFloat newWidth = self.bounds.size.width * scaleFactor;
+        CGFloat newHeight = self.bounds.size.height * scaleFactor;
         _backgroundImageView.frame = CGRectMake(0.5f * (self.bounds.size.width - newWidth),
-                                                newOffset.y,
+                                                0.5f * (self.bounds.size.height - newHeight),
                                                 newWidth,
-                                                self.bounds.size.height * scaleFactor);
+                                                newHeight);
     } else {
         _backgroundImageView.frame = self.bounds;
     }
@@ -111,8 +122,10 @@
 {
     [super layoutSubviews];
 
+    CGFloat selfHeight = self.frame.size.height;
+
     // Update shrinked content view
-    CGFloat shrinkY = 2 * (self.frame.size.height - _shrinkHeight);
+    CGFloat shrinkY = 2 * (selfHeight - _shrinkHeight);
     _shrinkedContentView.superview.frame = self.bounds;
     _shrinkedContentView.frame = CGRectMake(0, shrinkY, _shrinkedContentView.superview.bounds.size.width, _shrinkHeight);
 
