@@ -102,6 +102,9 @@
                                                 0.5f * (self.bounds.size.height - newHeight),
                                                 newWidth,
                                                 newHeight);
+        if (self.onLayout) {
+            self.onLayout(self, _fullsizeContentView, _shrinkedContentView);
+        }
     } else {
         _backgroundImageView.frame = self.bounds;
     }

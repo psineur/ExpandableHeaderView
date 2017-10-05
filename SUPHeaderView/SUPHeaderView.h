@@ -69,7 +69,7 @@
 @property(nonatomic, assign, readonly) CGFloat originalHeight;
 @property(nonatomic, assign, readonly) CGFloat shrinkHeight;
 
-@property(nonatomic, copy, readwrite) void (^onLayout)(UIView *headerView, UIView *fullsizeContent, UIView *shrinkContent);
+@property(nonatomic, copy, readwrite) void (^onLayout)(SUPHeaderView *headerView, UIView *fullsizeContent, UIView *shrinkContent);
 
 @property(nonatomic, strong, readonly) UIImageView *backgroundImageView;
 @property(nonatomic, strong, readonly) UIView *shrinkedContentView;
