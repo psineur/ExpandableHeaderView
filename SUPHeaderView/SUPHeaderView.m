@@ -74,6 +74,7 @@
         _backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
         _backgroundImageView.clipsToBounds = YES;
         _backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        [_backgroundImageView addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionNew context:nil];
         [self addSubview:_backgroundImageView];
         
         UIView *fullsizeSuperview = [[PassthroughView alloc] initWithFrame:CGRectZero];
@@ -91,6 +92,18 @@
     }
     
     return self;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"image"] && object == _backgroundImageView) {
+        _originalBackgroundImage = _backgroundImageView.image;
+    }
+}
+
+- (void)dealloc
+{
+    [_backgroundImageView removeObserver:self forKeyPath:@"image"];
 }
 
 - (void)resetBackgroundImage
