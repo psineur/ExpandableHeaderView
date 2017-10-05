@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SUPHeaderView'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = 'Twitter - like Profile Header view for UITableView that stretches and collapses.'
   s.description      = <<-DESC
 MEExpandableHeaderView without pages & with alternative collapsed mode content.
