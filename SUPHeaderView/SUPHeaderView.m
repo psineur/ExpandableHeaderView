@@ -30,6 +30,23 @@
 #import "SUPHeaderView.h"
 #import <Accelerate/Accelerate.h>
 
+@interface PassthroughView : UIView
+@end
+
+@implementation PassthroughView
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
+{
+    for (UIView *view in self.subviews) {
+        if (!view.hidden && [view pointInside:[self convertPoint:point toView:view] withEvent:event]) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+@end
+
 @interface SUPHeaderView()
 @end
 
@@ -59,14 +76,15 @@
         _backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         [self addSubview:_backgroundImageView];
         
-        UIView *fullsizeSuperview = [[UIView alloc] initWithFrame:CGRectZero];
-        _fullsizeContentView = [[UIView alloc] initWithFrame:CGRectZero];
-        fullsizeSuperview.clipsToBounds = YES;
+        UIView *fullsizeSuperview = [[PassthroughView alloc] initWithFrame:CGRectZero];
+        fullsizeSuperview.userInteractionEnabled = YES;
+        _fullsizeContentView = [[PassthroughView alloc] initWithFrame:CGRectZero];
         [fullsizeSuperview addSubview:_fullsizeContentView];
         [self addSubview:fullsizeSuperview];
 
-        UIView *shrinkSuperview = [[UIView alloc] initWithFrame:CGRectZero];
-        _shrinkedContentView = [[UIView alloc] initWithFrame:CGRectZero];
+        UIView *shrinkSuperview = [[PassthroughView alloc] initWithFrame:CGRectZero];
+        shrinkSuperview.userInteractionEnabled = YES;
+        _shrinkedContentView = [[PassthroughView alloc] initWithFrame:CGRectZero];
         shrinkSuperview.clipsToBounds = YES;
         [shrinkSuperview addSubview:_shrinkedContentView];
         [self addSubview:shrinkSuperview];
